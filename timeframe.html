@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Select Time Frame — Trade Algo Bot</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #0b0e19;
+        font-family: 'Poppins', sans-serif;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+    }
+
+    .title-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid #42507a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 18px auto;
+        font-size: 26px;
+        opacity: 0.8;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #d5dbff;
+    }
+
+    p.sub {
+        margin-top: 6px;
+        margin-bottom: 22px;
+        font-size: 13px;
+        color: #7c86a5;
+    }
+
+    .box-area {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+
+    .box {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 14px;
+        padding: 18px 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .box:hover {
+        transform: scale(1.03);
+        border-color: #6c4cff;
+    }
+
+    .box-icon {
+        font-size: 22px;
+        margin-bottom: 4px;
+    }
+
+    .box-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .box-sub {
+        font-size: 12px;
+        color: #9aa3bc;
+        margin-top: 4px;
+    }
+
+    .recommend-text {
+        font-size: 12px;
+        color: #7a86a8;
+        text-align: left;
+        margin: 10px 0 18px 2px;
+        line-height: 1.35;
+    }
+
+    .back-btn {
+        width: 100%;
+        padding: 13px 12px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #d7dcff;
+        border: none;
+        border-radius: 12px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .back-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    
+    <!-- Top Icon -->
+    <div class="title-icon">⏱️</div>
+
+    <h2>Select Time Frame</h2>
+    <p class="sub">Choose your analysis period</p>
+
+    <!-- Boxes -->
+    <div class="box-area">
+
+        <div class="box" onclick="selectTime('5s')">
+            <div class="box-icon">⚡</div>
+            <div class="box-title">5s</div>
+            <div class="box-sub">Ultra Fast</div>
+        </div>
+
+        <div class="box" onclick="selectTime('30s')">
+            <div class="box-icon">🔥</div>
+            <div class="box-title">30s</div>
+            <div class="box-sub">Stable</div>
+        </div>
+
+        <div class="box" onclick="selectTime('15s')">
+            <div class="box-icon">⭐</div>
+            <div class="box-title">15s</div>
+            <div class="box-sub">Medium</div>
+        </div>
+
+        <div class="box" onclick="selectTime('60s')">
+            <div class="box-icon">💠</div>
+            <div class="box-title">60s</div>
+            <div class="box-sub">Optimal</div>
+        </div>
+
+    </div>
+
+    <div class="recommend-text">
+        <strong>Recommended:</strong><br>
+        60 seconds is optimal for quick signals with good accuracy.
+    </div>
+
+    <button class="back-btn" id="backBtn">← Back to Pairs</button>
+
+</div>
+
+<script>
+// read querystring helper
+function qs(name){
+  const u = new URLSearchParams(location.search);
+  return u.get(name);
+}
+
+// get pair and flags from query param
+const selectedPair = qs('pair') || 'EURUSD';
+const flag1 = qs('flag1') || ''; // e.g. 'eu'
+const flag2 = qs('flag2') || ''; // e.g. 'us'
+
+// Select time and go to dashboard, include pair, flags and timeframe
+function selectTime(tf) {
+    const url = `dashboard.html?pair=${encodeURIComponent(selectedPair)}&flag1=${encodeURIComponent(flag1)}&flag2=${encodeURIComponent(flag2)}&tf=${encodeURIComponent(tf)}`;
+    window.location.href = url;
+}
+
+// Back button - go back to index/pairs.
+document.getElementById('backBtn').addEventListener('click', function(){
+    window.location.href = 'index.html';
+});
+</script>
+
+</body>
+</html>
